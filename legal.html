@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal — API Key Vault 2.0 by ProTusk</title>
+<meta name="description" content="Terms of Service, End-User License Agreement, Privacy Policy, and Disclaimer for API Key Vault 2.0 by ProTusk.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="512x512" href="protusk-logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#050a12;--bg2:#0a1628;--card:#0d1b2e;--border:rgba(88,166,255,.12);--border2:rgba(88,166,255,.3);--text:#e6edf3;--muted:#8b949e;--dim:#5a6370;--accent:#2f81f7;--accent2:#58a6ff;--grad:linear-gradient(135deg,#2f81f7,#a371f7);--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono','Cascadia Code','Fira Code',monospace;--r:12px;--t:.3s cubic-bezier(.4,0,.2,1)}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.8;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,10,18,.92);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-logo{width:36px;height:36px;border-radius:10px}
+.nav-title{font-size:17px;font-weight:700;color:var(--text);letter-spacing:-.3px}
+.nav-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.back-link{color:var(--accent2);text-decoration:none;font-size:14px;font-weight:500;transition:var(--t)}
+.back-link:hover{color:#fff}
+
+/* LAYOUT */
+.legal-wrap{max-width:820px;margin:0 auto;padding:120px 32px 80px}
+.legal-updated{font-size:13px;color:var(--dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.legal-title{font-size:38px;font-weight:800;letter-spacing:-.5px;margin-bottom:12px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.legal-subtitle{font-size:15px;color:var(--muted);margin-bottom:48px;line-height:1.7}
+
+/* TOC */
+.toc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px 32px;margin-bottom:48px}
+.toc h3{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;color:var(--accent2)}
+.toc ol{padding-left:20px}
+.toc li{margin-bottom:8px}
+.toc a{color:var(--accent2);text-decoration:none;font-size:14px;transition:var(--t)}
+.toc a:hover{color:#fff;text-decoration:underline}
+/* SECTIONS */
+.legal-section{margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--border)}
+.legal-section:last-of-type{border-bottom:none}
+.section-num{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px}
+.section-heading{font-size:24px;font-weight:700;margin-bottom:20px;color:var(--text)}
+h4{font-size:16px;font-weight:600;margin:24px 0 10px;color:var(--accent2)}
+p,li{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+ul,ol{padding-left:24px;margin-bottom:16px}
+li{margin-bottom:6px}
+strong{color:var(--text);font-weight:600}
+.allcaps{text-transform:uppercase}
+
+/* HIGHLIGHT BOX */
+.highlight-box{background:rgba(47,129,247,.06);border:1px solid rgba(47,129,247,.2);border-radius:var(--r);padding:20px 24px;margin:20px 0;font-size:14px;color:var(--text);line-height:1.7}
+.highlight-box.warn{background:rgba(248,81,73,.06);border-color:rgba(248,81,73,.2)}
+
+/* FOOTER */
+.legal-footer{max-width:820px;margin:0 auto;padding:32px 32px 48px;border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--dim)}
+.legal-footer a{color:var(--accent2);text-decoration:none}
+.legal-footer a:hover{text-decoration:underline}
+
+@media(max-width:640px){
+.nav{padding:0 20px}
+.legal-wrap{padding:100px 20px 60px}
+.legal-title{font-size:28px}
+.section-heading{font-size:20px}
+.toc{padding:20px 24px}
+}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-brand"><img src="protusk-logo.png" alt="ProTusk" class="nav-logo"><span class="nav-title">API Key <span>Vault 2.0</span></span></a>
+  <a href="index.html" class="back-link">&larr; Back to Home</a>
+</nav>
+
+<main class="legal-wrap">
+<p class="legal-updated">Last Updated: March 25, 2026</p>
+<h1 class="legal-title">Legal</h1>
+<p class="legal-subtitle">This page contains the End-User License Agreement (EULA) &amp; Terms of Service, Privacy Policy, and Disclaimer &amp; Limitation of Liability for API Key Vault 2.0, a product of ProTusk. By downloading, installing, or using the Software, you agree to be bound by the terms below.</p>
+
+<!-- TABLE OF CONTENTS -->
+<nav class="toc">
+<h3>Table of Contents</h3>
+<ol>
+  <li><a href="#eula">End-User License Agreement &amp; Terms of Service</a></li>
+  <li><a href="#privacy">Privacy Policy</a></li>
+  <li><a href="#disclaimer">Disclaimer &amp; Limitation of Liability</a></li>
+  <li><a href="#indemnification">Indemnification</a></li>
+  <li><a href="#governing">Governing Law &amp; Dispute Resolution</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ol>
+</nav>
+<!-- SECTION 1: EULA & TOS -->
+<section class="legal-section" id="eula">
+<p class="section-num">Section 1</p>
+<h2 class="section-heading">End-User License Agreement &amp; Terms of Service</h2>
+
+<p>This End-User License Agreement ("EULA") is a legally binding contract between you ("User," "you," or "your") and ProTusk ("Company," "we," "us," or "our") governing your use of the API Key Vault 2.0 desktop application and all associated editions (Free, Personal, Customer, Personal-AI, Customer-AI), updates, documentation, and related files (collectively, the "Software").</p>
+
+<div class="highlight-box"><strong>By installing, copying, or otherwise using the Software, you acknowledge that you have read, understood, and agree to be bound by this EULA. If you do not agree, do not install or use the Software.</strong></div>
+
+<h4>1.1 License Grant</h4>
+<p>Subject to the terms of this EULA and upon valid purchase (where applicable), ProTusk grants you a <strong>limited, non-exclusive, non-transferable, non-sublicensable, revocable license</strong> to install and use the Software on the number of devices specified by your purchased edition, solely for your personal or internal business purposes. The Free edition is licensed for use on one (1) device at no cost, subject to the feature limitations described on the product page.</p>
+
+<h4>1.2 License Restrictions</h4>
+<p>You shall NOT:</p>
+<ul>
+<li>Copy, modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works based on the Software, in whole or in part;</li>
+<li>Distribute, sublicense, lease, rent, loan, sell, resell, or otherwise transfer the Software or your license to any third party;</li>
+<li>Remove, alter, or obscure any proprietary notices, labels, watermarks, or branding contained in the Software;</li>
+<li>Use the Software to develop a competing product or service;</li>
+<li>Circumvent, disable, or interfere with any security, obfuscation, licensing, or access-control features of the Software;</li>
+<li>Use the Software for any unlawful purpose or in violation of any applicable laws or regulations;</li>
+<li>Use automated tools, including but not limited to AI engines, scrapers, or code analysis tools, to reproduce, replicate, or extract the source code, architecture, or design of the Software.</li>
+</ul>
+<h4>1.3 Intellectual Property</h4>
+<p>The Software, including all code, design, graphics, logos, the ProTusk name and elephant mascot, the "API Key Vault" name, documentation, and trade secrets, is and shall remain the sole and exclusive property of ProTusk. This EULA does not grant you any ownership interest in the Software. All rights not expressly granted herein are reserved by ProTusk.</p>
+
+<h4>1.4 Obfuscation &amp; Code Protection</h4>
+<p>The Software contains proprietary obfuscation, code protection, and anti-reverse-engineering measures ("Code Armor"). Any attempt to circumvent, reverse engineer, deobfuscate, or defeat these protections constitutes a <strong>material breach</strong> of this EULA and may subject you to civil and criminal liability under applicable law, including but not limited to the Digital Millennium Copyright Act (DMCA), 17 U.S.C. &sect; 1201, and the Computer Fraud and Abuse Act (CFAA), 18 U.S.C. &sect; 1030.</p>
+
+<h4>1.5 AI Editions &mdash; Additional Terms</h4>
+<p>If you are using a Personal-AI or Customer-AI edition, the following additional terms apply:</p>
+<ul>
+<li>The localhost REST API (port 7777) is provided for <strong>local use only</strong>. You may not expose it to public networks, the internet, or any remote systems.</li>
+<li>Session tokens are generated per unlock and must be treated as confidential credentials. ProTusk is not responsible for unauthorized access resulting from your failure to protect session tokens.</li>
+<li>ProTusk is not responsible for any actions taken by third-party AI tools that access the API, including but not limited to data modification, deletion, or corruption.</li>
+</ul>
+
+<h4>1.6 Updates &amp; Modifications</h4>
+<p>ProTusk may release updates, patches, or new versions of the Software at its sole discretion. This EULA applies to all such updates unless a separate agreement accompanies the update. ProTusk has no obligation to provide updates, support, or maintenance.</p>
+
+<h4>1.7 Termination</h4>
+<p>This EULA is effective until terminated. Your rights under this EULA will terminate automatically and without notice if you fail to comply with any of its terms. Upon termination, you must immediately cease all use of the Software and destroy all copies in your possession. Sections 1.2, 1.3, 1.4, and all Disclaimer, Limitation of Liability, and Indemnification provisions shall survive termination.</p>
+</section>
+<!-- SECTION 2: PRIVACY POLICY -->
+<section class="legal-section" id="privacy">
+<p class="section-num">Section 2</p>
+<h2 class="section-heading">Privacy Policy</h2>
+
+<p>ProTusk is committed to protecting your privacy. This Privacy Policy describes what information we collect (and do not collect), how we handle it, and your rights under California law, including the California Consumer Privacy Act (CCPA/CPRA) and the California Online Privacy Protection Act (CalOPPA).</p>
+
+<div class="highlight-box"><strong>API Key Vault 2.0 is a 100% offline, zero-knowledge application. We do not collect, transmit, store, or process any personal data, usage data, telemetry, analytics, or any other information from your device. Period.</strong></div>
+
+<h4>2.1 Data We Do NOT Collect</h4>
+<p>The Software does not collect, transmit, or share any of the following:</p>
+<ul>
+<li>Personal information (name, email, address, phone number, government identifiers)</li>
+<li>Device information (hardware ID, OS version, IP address, MAC address)</li>
+<li>Usage data, analytics, or telemetry of any kind</li>
+<li>API keys, tokens, secrets, passwords, or any data you store in the vault</li>
+<li>Crash reports, error logs, or diagnostic data</li>
+<li>Cookies, tracking pixels, or browser fingerprints</li>
+<li>Location data</li>
+</ul>
+<p>The Software makes <strong>zero network requests</strong>. It does not connect to the internet, phone home, check for updates automatically, or communicate with any server. All encryption, decryption, and storage operations occur entirely on your local device.</p>
+
+<h4>2.2 Local Data Storage</h4>
+<p>The Software stores your encrypted vault file locally on your device using your operating system's standard application data directory. This file is encrypted with AES-256-GCM and can only be decrypted with your master password. ProTusk has no ability to access, read, recover, or decrypt your vault data. <strong>If you lose your master password, your data is permanently unrecoverable.</strong></p>
+<h4>2.3 AI Edition API (Personal-AI &amp; Customer-AI)</h4>
+<p>The AI editions include a localhost-only REST API on port 7777. This API operates exclusively on your local machine (127.0.0.1) and does not transmit data over any network. Communication between the API and external AI tools occurs entirely within your local system. ProTusk does not receive, intercept, log, or have any access to API requests or responses.</p>
+
+<h4>2.4 Purchase Transactions</h4>
+<p>Purchases are processed by our third-party payment processor, <strong>LemonSqueezy</strong> (Lemon Squeezy, LLC). ProTusk does not directly collect or store your payment information (credit card numbers, billing addresses, etc.). LemonSqueezy's handling of your payment data is governed by their own <a href="https://www.lemonsqueezy.com/privacy" target="_blank" style="color:var(--accent2)">Privacy Policy</a>. We may receive limited transaction information from LemonSqueezy (e.g., order confirmation, license key, email address used for purchase) solely for the purpose of fulfilling your order and providing customer support.</p>
+
+<h4>2.5 Marketing Website (protusk.com)</h4>
+<p>Our marketing website hosted on GitHub Pages may use standard GitHub Pages infrastructure, which may log IP addresses as part of standard web server operations. ProTusk does not add any additional tracking, analytics, cookies, or third-party scripts beyond LemonSqueezy's checkout overlay. We do not use Google Analytics, Facebook Pixel, or any other tracking service.</p>
+
+<h4>2.6 Children's Privacy</h4>
+<p>The Software is not directed at children under the age of 13. We do not knowingly collect personal information from children. Since the Software collects no data, this provision is included for regulatory completeness.</p>
+
+<h4>2.7 Your Rights Under California Law (CCPA/CPRA)</h4>
+<p>Under the California Consumer Privacy Act and the California Privacy Rights Act, California residents have the right to know what personal information is collected, request deletion, and opt out of the sale or sharing of personal information. Because ProTusk collects <strong>no personal information whatsoever</strong> from the Software, there is no data to disclose, delete, or opt out of. If you believe we hold any personal information about you, you may contact us at the address below, and we will respond within 45 days as required by law.</p>
+
+<h4>2.8 Changes to This Privacy Policy</h4>
+<p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated "Last Updated" date. Your continued use of the Software after any changes constitutes acceptance of the revised policy.</p>
+</section>
+<!-- SECTION 3: DISCLAIMER & LIMITATION OF LIABILITY -->
+<section class="legal-section" id="disclaimer">
+<p class="section-num">Section 3</p>
+<h2 class="section-heading">Disclaimer &amp; Limitation of Liability</h2>
+
+<div class="highlight-box warn"><strong class="allcaps">PLEASE READ THIS SECTION CAREFULLY. IT LIMITS PROTUSK'S LIABILITY TO YOU AND AFFECTS YOUR LEGAL RIGHTS.</strong></div>
+
+<h4>3.1 Disclaimer of Warranties</h4>
+<p class="allcaps"><strong>THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, AND ACCURACY. PROTUSK DOES NOT WARRANT THAT THE SOFTWARE WILL BE UNINTERRUPTED, ERROR-FREE, SECURE, VIRUS-FREE, OR THAT ANY DEFECTS WILL BE CORRECTED.</strong></p>
+<p>ProTusk makes no representation or warranty regarding the reliability, accuracy, completeness, or timeliness of the Software or any data stored, encrypted, or managed by the Software. You acknowledge that the use of the Software is at your sole risk.</p>
+
+<h4>3.2 Limitation of Liability</h4>
+<p class="allcaps"><strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL PROTUSK, ITS OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, AFFILIATES, SUCCESSORS, OR ASSIGNS BE LIABLE FOR ANY OF THE FOLLOWING, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY, OR ANY OTHER LEGAL THEORY, EVEN IF PROTUSK HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES:</strong></p>
+<ul>
+<li><strong>Indirect, incidental, special, consequential, or punitive damages of any kind;</strong></li>
+<li><strong>Loss of profits, revenue, business, goodwill, data, or anticipated savings;</strong></li>
+<li><strong>Loss of or damage to API keys, tokens, secrets, passwords, or any data stored in the vault;</strong></li>
+<li><strong>Unauthorized access to or alteration of your data or transmissions;</strong></li>
+<li><strong>Cost of procurement of substitute goods or services;</strong></li>
+<li><strong>Business interruption, system failure, or loss of use;</strong></li>
+<li><strong>Any damages arising from the use of the AI edition REST API, including but not limited to data corruption, deletion, or unauthorized access by third-party AI tools;</strong></li>
+<li><strong>Any damages arising from your inability to access your vault due to a lost or forgotten master password;</strong></li>
+<li><strong>Any other pecuniary loss arising out of or related to the use or inability to use the Software.</strong></li>
+</ul>
+<h4>3.3 Maximum Aggregate Liability</h4>
+<p class="allcaps"><strong>IN NO EVENT SHALL PROTUSK'S TOTAL CUMULATIVE LIABILITY TO YOU FOR ALL CLAIMS ARISING OUT OF OR RELATED TO THIS EULA OR THE SOFTWARE EXCEED THE AMOUNT YOU ACTUALLY PAID TO PROTUSK FOR THE SOFTWARE IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM, OR TEN UNITED STATES DOLLARS ($10.00 USD), WHICHEVER IS GREATER.</strong></p>
+
+<h4>3.4 Assumption of Risk</h4>
+<p>You expressly acknowledge and agree that:</p>
+<ul>
+<li>You are solely responsible for the security of your master password and any session tokens generated by the AI edition;</li>
+<li>ProTusk operates on a <strong>zero-knowledge architecture</strong> and cannot recover, reset, or bypass your master password under any circumstances;</li>
+<li>The Software stores data locally on your device and ProTusk has no backup, recovery, or data redundancy capability;</li>
+<li>You are solely responsible for maintaining backups of your vault data;</li>
+<li>Any use of the AI edition REST API with third-party tools is at your own risk, and you are solely responsible for the behavior of those tools;</li>
+<li>The encryption and security mechanisms in the Software, while implemented using industry-standard algorithms (AES-256-GCM, PBKDF2), are not guaranteed to be impervious to all attack vectors, including those that may be discovered in the future.</li>
+</ul>
+
+<h4>3.5 Essential Basis of the Bargain</h4>
+<p>You acknowledge that ProTusk has set its prices and entered into this EULA in reliance upon the disclaimers of warranty and the limitations of liability set forth herein, that the same reflect an allocation of risk between the parties (including the risk that a contract remedy may fail of its essential purpose and cause consequential loss), and that the same form an essential basis of the bargain between the parties.</p>
+</section>
+<!-- SECTION 4: INDEMNIFICATION -->
+<section class="legal-section" id="indemnification">
+<p class="section-num">Section 4</p>
+<h2 class="section-heading">Indemnification</h2>
+
+<p>You agree to indemnify, defend, and hold harmless ProTusk and its officers, directors, employees, agents, affiliates, successors, and assigns from and against any and all claims, damages, obligations, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from or related to:</p>
+<ul>
+<li>Your use or misuse of the Software;</li>
+<li>Your violation of this EULA or any applicable law or regulation;</li>
+<li>Your violation of any third-party rights, including intellectual property, privacy, or contractual rights;</li>
+<li>Any data you store in or transmit through the Software;</li>
+<li>Any third-party claims arising from your use of the AI edition REST API;</li>
+<li>Your failure to maintain the confidentiality of your master password or session tokens;</li>
+<li>Any unauthorized access to your vault or API resulting from your negligence.</li>
+</ul>
+<p>This indemnification obligation shall survive the termination of this EULA and your use of the Software.</p>
+</section>
+
+<!-- SECTION 5: GOVERNING LAW -->
+<section class="legal-section" id="governing">
+<p class="section-num">Section 5</p>
+<h2 class="section-heading">Governing Law &amp; Dispute Resolution</h2>
+
+<h4>5.1 Governing Law</h4>
+<p>This EULA and any disputes arising out of or related to it shall be governed by and construed in accordance with the laws of the <strong>State of California, United States of America</strong>, without regard to its conflict of law provisions.</p>
+<h4>5.2 Mandatory Arbitration</h4>
+<p>Any dispute, claim, or controversy arising out of or relating to this EULA or the breach, termination, enforcement, interpretation, or validity thereof, including the determination of the scope or applicability of this agreement to arbitrate, shall be determined by <strong>binding arbitration</strong> administered by JAMS pursuant to its Streamlined Arbitration Rules and Procedures. The arbitration shall take place in <strong>San Francisco County, California</strong>. Judgment on the arbitration award may be entered in any court having jurisdiction thereof.</p>
+
+<h4>5.3 Class Action Waiver</h4>
+<p class="allcaps"><strong>YOU AGREE THAT ANY DISPUTE RESOLUTION PROCEEDINGS WILL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT IN A CLASS, CONSOLIDATED, OR REPRESENTATIVE ACTION. YOU WAIVE YOUR RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT OR CLASS-WIDE ARBITRATION AGAINST PROTUSK.</strong></p>
+
+<h4>5.4 Small Claims Exception</h4>
+<p>Notwithstanding the foregoing, either party may bring an individual action in small claims court for disputes within the jurisdictional limits of that court.</p>
+
+<h4>5.5 Injunctive Relief</h4>
+<p>Notwithstanding any provision of this EULA to the contrary, ProTusk shall be entitled to seek injunctive or other equitable relief in any court of competent jurisdiction to prevent the actual or threatened infringement, misappropriation, or violation of ProTusk's copyrights, trademarks, trade secrets, patents, or other intellectual property rights, without the requirement of posting a bond.</p>
+
+<h4>5.6 Severability</h4>
+<p>If any provision of this EULA is held to be unenforceable or invalid under any applicable law, such unenforceability or invalidity shall not render this EULA unenforceable or invalid as a whole. Such provision shall be revised to the minimum extent necessary to make it enforceable, and all other provisions shall continue in full force and effect.</p>
+
+<h4>5.7 Entire Agreement</h4>
+<p>This EULA constitutes the entire agreement between you and ProTusk with respect to the Software and supersedes all prior or contemporaneous understandings, communications, and agreements, whether written or oral, regarding the subject matter hereof. No amendment or modification of this EULA shall be binding unless in writing and signed by ProTusk.</p>
+</section>
+<!-- SECTION 6: CONTACT -->
+<section class="legal-section" id="contact">
+<p class="section-num">Section 6</p>
+<h2 class="section-heading">Contact</h2>
+<p>If you have any questions about this EULA, Privacy Policy, or Disclaimer, please contact us at:</p>
+<p><strong>ProTusk</strong><br>Email: <a href="mailto:protusk@protonmail.com" style="color:var(--accent2)">protusk@protonmail.com</a><br>Website: <a href="https://protusk.com" style="color:var(--accent2)">protusk.com</a></p>
+</section>
+
+</main>
+
+<footer class="legal-footer">
+<p>&copy; 2026 ProTusk. All rights reserved. &bull; <a href="index.html">Home</a> &bull; <a href="mailto:protusk@protonmail.com">Contact</a></p>
+</footer>
+
+</body>
+</html>
