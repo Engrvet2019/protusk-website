@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>API Key Vault 2.0 by ProTusk — Secure Your API Keys</title>
+<link rel="icon" type="image/x-icon" href="api-dash.ico">
+<link rel="icon" type="image/png" sizes="512x512" href="protusk-logo-512.png">
+<link rel="apple-touch-icon" href="protusk-logo-512.png">
+<meta name="description" content="API Key Vault 2.0 — Encrypt all your API keys behind one password. Offline. Portable. Pay once, own forever. Starting free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050a12;--bg2:#0a1628;--card:#0d1b2e;
+  --border:rgba(88,166,255,.12);--border2:rgba(88,166,255,.3);
+  --text:#e6edf3;--muted:#8b949e;--dim:#5a6370;
+  --accent:#2f81f7;--accent2:#58a6ff;
+  --ok:#3fb950;--warn:#d29922;--purple:#a371f7;
+  --grad:linear-gradient(135deg,#2f81f7,#a371f7);
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --r:12px;--rl:20px;
+  --t:.3s cubic-bezier(.4,0,.2,1)
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;touch-action:manipulation}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}/* Touch-friendly: min 44px tap targets, no 300ms delay */
+a,button{min-height:44px;display:inline-flex;align-items:center;touch-action:manipulation}
+
+/* AMBIENT */
+.ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.35;animation:fl 20s ease-in-out infinite}
+.o1{width:300px;height:300px;background:rgba(47,129,247,.15);top:-80px;left:-60px}
+.o2{width:250px;height:250px;background:rgba(163,113,247,.12);bottom:20%;right:-80px;animation-delay:-7s}
+@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(15px,-20px) scale(1.05)}}
+
+/* NAV — slim sticky bar */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,10,18,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{width:32px;height:32px;border-radius:8px}
+.nav-title{font-size:15px;font-weight:700;color:var(--text)}
+.nav-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-cta{padding:8px 20px;background:var(--grad);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:var(--t)}
+
+/* HERO — punchy, minimal */
+.hero{position:relative;z-index:1;padding:80px 20px 48px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:rgba(47,129,247,.1);border:1px solid rgba(47,129,247,.2);border-radius:100px;font-size:12px;color:var(--accent2);font-weight:500;margin-bottom:20px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+h1{font-size:36px;font-weight:900;line-height:1.1;letter-spacing:-1.2px;margin-bottom:6px}
+.gt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-by{font-size:13px;color:var(--dim);margin-bottom:14px;letter-spacing:.3px}
+.hero-by strong{color:var(--muted)}
+.hero-tag{font-size:15px;font-weight:600;color:var(--purple);margin-bottom:14px}
+.hero-desc{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:28px;max-width:400px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;flex-direction:column;gap:12px;max-width:320px;margin:0 auto 24px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:var(--t)}
+.btn-p{background:var(--grad);color:#fff;box-shadow:0 4px 20px rgba(47,129,247,.3)}
+.btn-s{background:transparent;color:var(--text);border:1px solid var(--border2)}
+
+.hero-proof{display:flex;justify-content:center;gap:24px;margin-top:20px}
+.hp-item{text-align:center}
+.hp-val{font-size:18px;font-weight:800;color:var(--text)}.hp-val span{color:var(--accent2)}
+.hp-lbl{font-size:11px;color:var(--dim);margin-top:2px}
+
+/* SOCIAL PROOF STRIP */
+.trust{padding:20px;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(10,22,40,.5)}
+.trust p{font-size:13px;color:var(--muted);font-style:italic;max-width:340px;margin:0 auto 8px}
+.trust .author{font-size:12px;color:var(--dim);font-weight:600}
+
+/* HIGHLIGHTS — quick feature punches */
+.highlights{position:relative;z-index:1;padding:40px 20px}
+.hl-title{text-align:center;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent2);margin-bottom:20px}
+.hl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:400px;margin:0 auto}
+.hl{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center;transition:var(--t)}
+.hl-icon{font-size:24px;margin-bottom:8px}
+.hl h3{font-size:13px;font-weight:700;margin-bottom:4px}
+.hl p{font-size:11px;color:var(--dim);line-height:1.4}
+
+/* PRICING */
+.pricing{position:relative;z-index:1;padding:40px 20px;background:var(--bg2)}
+.pricing-head{text-align:center;margin-bottom:24px}
+.pricing-head h2{font-size:28px;font-weight:800;letter-spacing:-.8px;margin-bottom:8px}
+.pricing-head p{font-size:14px;color:var(--muted)}
+/* Horizontal scroll pricing on mobile */
+.pricing-scroll{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:4px 0 16px;scrollbar-width:none}
+.pricing-scroll::-webkit-scrollbar{display:none}
+
+.pc{flex:0 0 280px;scroll-snap-align:center;background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:28px 20px;text-align:center;position:relative}
+.pc.featured{border-color:var(--accent);box-shadow:0 0 30px rgba(47,129,247,.15)}
+.pc.featured-ai{border-color:var(--purple);box-shadow:0 0 30px rgba(163,113,247,.2)}
+.pc-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);padding:4px 14px;background:var(--grad);color:#fff;font-size:10px;font-weight:700;border-radius:100px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.pc-badge.ai{background:linear-gradient(135deg,#a371f7,#58a6ff)}
+.pc-name{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.pc-price{font-size:40px;font-weight:800;letter-spacing:-1.5px;margin-bottom:4px}
+.pc-once{display:inline-block;padding:3px 10px;border-radius:6px;background:rgba(63,185,80,.1);color:var(--ok);font-size:10px;font-weight:700;text-transform:uppercase;margin-bottom:16px}
+.pc-once.free{background:rgba(139,148,158,.1);color:var(--muted)}
+.pc-list{list-style:none;text-align:left;margin-bottom:20px}
+.pc-list li{padding:6px 0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.03)}
+.pc-list li:last-child{border:none}
+.ck{color:var(--ok);font-weight:700;flex-shrink:0}
+.xk{color:var(--dim);flex-shrink:0}
+.pc-btn{display:block;width:100%;padding:12px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:var(--t);text-align:center}
+.pc-btn-o{background:transparent;color:var(--text);border:1px solid var(--border)}
+.pc-btn-f{background:var(--grad);color:#fff}
+.pc-btn-ai{background:linear-gradient(135deg,#a371f7,#58a6ff);color:#fff}
+.ai-warn{margin-top:10px;padding:8px 10px;background:rgba(210,153,34,.1);border:1px solid rgba(210,153,34,.2);border-radius:8px;font-size:10px;color:var(--warn);line-height:1.4;text-align:left}
+
+.scroll-hint{text-align:center;margin-top:8px;font-size:11px;color:var(--dim)}
+/* CTA */
+.cta{position:relative;z-index:1;padding:48px 20px;text-align:center}
+.cta h2{font-size:28px;font-weight:800;letter-spacing:-.8px;margin-bottom:10px}
+.cta p{font-size:14px;color:var(--muted);margin-bottom:8px}
+.cta .cta-price{font-size:13px;color:var(--ok);font-weight:600;margin-bottom:24px}
+.cta-btns{display:flex;flex-direction:column;gap:12px;max-width:320px;margin:0 auto}
+.cta-social{margin-top:32px;font-size:12px;color:var(--dim)}
+.cta-social a{color:var(--accent2);text-decoration:none}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center}
+.footer p{font-size:12px;color:var(--dim)}
+.footer a{color:var(--accent2);text-decoration:none}
+
+/* TOUCH FEEDBACK — active press states */
+.btn:active,.pc-btn:active,.nav-cta:active{transform:scale(.97);opacity:.9}
+.hl:active{border-color:var(--border2);transform:scale(.98)}
+
+/* DESKTOP SCALING — looks good on wider screens too */
+@media(min-width:640px){
+  h1{font-size:48px}
+  .hero-desc{font-size:16px}
+  .hero-btns,.cta-btns{flex-direction:row;max-width:460px;justify-content:center}
+  .btn{flex:1}
+  .hl-grid{grid-template-columns:repeat(4,1fr);max-width:600px}
+  .pricing-scroll{justify-content:center;flex-wrap:wrap;overflow-x:visible}
+  .pc{flex:0 0 260px}
+  .scroll-hint{display:none}
+}
+@media(min-width:1024px){
+  .pc{flex:0 0 220px}
+}
+</style>
+</head>
+<body>
+<div class="ambient"><div class="orb o1"></div><div class="orb o2"></div></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-brand"><img src="protusk-logo.png" alt="ProTusk" class="nav-logo"><span class="nav-title">API Key <span>Vault 2.0</span></span></a>
+  <a href="#pricing" class="nav-cta">Buy Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span> v2.0 Now Available</div>
+  <h1><span class="gt">One Password.</span><br>All Your API Keys.</h1>
+  <div class="hero-by">by <strong>ProTusk</strong></div>
+  <div class="hero-tag">Encrypted. Offline. Yours Forever.</div>
+  <p class="hero-desc">Stop storing API keys in plaintext. Encrypt everything behind one master password. No cloud. No subscription.</p>
+  <div class="hero-btns">
+    <a href="#pricing" class="btn btn-p">Buy Now &#8212; $9.99</a>
+    <a href="#pricing" class="btn btn-s">Try Free</a>
+  </div>
+  <div class="hero-proof">
+    <div class="hp-item"><div class="hp-val"><span>AES-256</span></div><div class="hp-lbl">Encryption</div></div>
+    <div class="hp-item"><div class="hp-val">$0</div><div class="hp-lbl">Free tier</div></div>
+    <div class="hp-item"><div class="hp-val">Zero</div><div class="hp-lbl">Cloud access</div></div>
+  </div>
+</section>
+
+<!-- SINGLE TESTIMONIAL STRIP -->
+<div class="trust">
+  <p>"$9.99 one-time vs $96/year for 1Password? Easy choice. No install, no admin rights. Works anywhere."</p>
+  <span class="author">&#8212; James L., Freelance DevOps Engineer</span>
+</div>
+<!-- QUICK FEATURE HIGHLIGHTS -->
+<section class="highlights">
+  <div class="hl-title">Why Vault 2.0</div>
+  <div class="hl-grid">
+    <div class="hl"><div class="hl-icon">&#128274;</div><h3>AES-256-GCM</h3><p>Military-grade encryption</p></div>
+    <div class="hl"><div class="hl-icon">&#128194;</div><h3>Multi-Field</h3><p>Key + Secret + Region in one card</p></div>
+    <div class="hl"><div class="hl-icon">&#128640;</div><h3>Portable EXE</h3><p>No install needed</p></div>
+    <div class="hl"><div class="hl-icon">&#9201;</div><h3>Auto-Lock</h3><p>5 min timeout + clipboard clear</p></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-head">
+    <h2>Try Free. Pay Once.</h2>
+    <p>No subscription. Own it forever.</p>
+  </div>
+  <div class="pricing-scroll">
+
+    <div class="pc">
+      <div class="pc-name">Free</div>
+      <div class="pc-price">$0</div>
+      <div class="pc-once free">Free Forever</div>
+      <ul class="pc-list">
+        <li><span class="ck">&#10003;</span> 5 API keys</li>
+        <li><span class="ck">&#10003;</span> AES-256-GCM</li>
+        <li><span class="ck">&#10003;</span> 2 categories</li>
+        <li><span class="xk">&#10007;</span> No multi-field</li>
+      </ul>
+      <a href="#" class="pc-btn pc-btn-o" id="freeDownload">Download Free</a>
+    </div>
+    <div class="pc">
+      <div class="pc-name">Personal</div>
+      <div class="pc-price">$9.99</div>
+      <div class="pc-once">One-Time</div>
+      <ul class="pc-list">
+        <li><span class="ck">&#10003;</span> Unlimited keys</li>
+        <li><span class="ck">&#10003;</span> Multi-field entries</li>
+        <li><span class="ck">&#10003;</span> Import / Export</li>
+        <li><span class="ck">&#10003;</span> 1 device</li>
+      </ul>
+      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/PERSONAL_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-btn-o lemonsqueezy-button">Buy &#8212; $9.99</a>
+    </div>
+
+    <div class="pc featured">
+      <div class="pc-badge">Best Value</div>
+      <div class="pc-name">Professional</div>
+      <div class="pc-price">$19.99</div>
+      <div class="pc-once">One-Time</div>
+      <ul class="pc-list">
+        <li><span class="ck">&#10003;</span> 3 devices</li>
+        <li><span class="ck">&#10003;</span> Priority support</li>
+        <li><span class="ck">&#10003;</span> Everything in Personal</li>
+      </ul>
+      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/PROFESSIONAL_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-btn-f lemonsqueezy-button">Buy &#8212; $19.99</a>
+    </div>
+
+    <div class="pc featured-ai">
+      <div class="pc-badge ai">AI-Powered</div>
+      <div class="pc-name">AI Edition</div>
+      <div class="pc-price">$24.99</div>
+      <div class="pc-once">One-Time</div>      <ul class="pc-list">
+        <li><span class="ck">&#10003;</span> 1 device only</li>
+        <li><span class="ck">&#10003;</span> REST API (localhost)</li>
+        <li><span class="ck">&#10003;</span> Token auth</li>
+        <li><span class="ck">&#10003;</span> AI tool access</li>
+      </ul>
+      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/AI_EDITION_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-btn-ai lemonsqueezy-button">Buy &#8212; $24.99</a>
+      <div class="ai-warn"><strong>&#9888; Use at own risk.</strong> Exposes vault via localhost API for external AI tools.</div>
+    </div>
+
+    <div class="pc">
+      <div class="pc-name">Team Pack</div>
+      <div class="pc-price">$49.99</div>
+      <div class="pc-once">One-Time</div>
+      <ul class="pc-list">
+        <li><span class="ck">&#10003;</span> 10 devices</li>
+        <li><span class="ck">&#10003;</span> Deployment guide</li>
+        <li><span class="ck">&#10003;</span> Everything in Pro</li>
+      </ul>
+      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/TEAM_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-btn-o lemonsqueezy-button">Buy &#8212; $49.99</a>
+    </div>
+
+  </div>
+  <div class="scroll-hint">Swipe to see all plans &rarr;</div>
+</section>
+<!-- CTA -->
+<section class="cta">
+  <h2>Stop Storing Keys<br>in <span class="gt">Plaintext</span>.</h2>
+  <p>One password. All your keys. Encrypted forever.</p>
+  <div class="cta-price">Free tier available &bull; Paid from $9.99</div>
+  <div class="cta-btns">
+    <a href="#pricing" class="btn btn-p">Get API Key Vault 2.0</a>
+  </div>
+  <div class="cta-social">Find us on <a href="#">Reddit</a> &bull; <a href="#">Twitter/X</a> &bull; <a href="#">Product Hunt</a></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>&copy; 2026 ProTusk &bull; <a href="#">Privacy</a> &bull; Sold on <a href="https://lemonsqueezy.com" target="_blank">LemonSqueezy</a></p>
+</footer>
+
+<script>
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
