@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Key Vault 2.0 by ProTusk — One Password. All Your API Keys. Military-Grade Encryption.</title>
+<link rel="icon" type="image/x-icon" href="api-dash.ico">
+<link rel="icon" type="image/png" sizes="512x512" href="protusk-logo-512.png">
+<link rel="apple-touch-icon" href="protusk-logo-512.png">
+<meta name="description" content="API Key Vault 2.0 — Secure, offline API key manager for developers. AES-256-GCM encryption, multi-field entries, one-click copy with auto-clear, auto-lock, and portable EXE. No cloud. No subscription. Pay once, own forever.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- 21st SDK: npm install @21st-sdk/react @21st-sdk/node -->
+<!-- Chat widget uses @21st-sdk/react AgentChat pattern -->
+<!-- https://github.com/21st-dev/21st-sdk -->
+
+<!-- LemonSqueezy Checkout Overlay -->
+<!-- SETUP: Replace YOUR_STORE_ID and variant IDs below once you create your store -->
+<script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+<link rel="stylesheet" href="https://assets.lemonsqueezy.com/lemon.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#050a12;--bg2:#0a1628;--card:#0d1b2e;--border:rgba(88,166,255,.12);--border2:rgba(88,166,255,.3);--text:#e6edf3;--muted:#8b949e;--dim:#5a6370;--accent:#2f81f7;--accent2:#58a6ff;--glow:rgba(47,129,247,.15);--ok:#3fb950;--warn:#d29922;--bad:#f85149;--purple:#a371f7;--indigo:#6366f1;--grad:linear-gradient(135deg,#2f81f7,#a371f7);--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono','Cascadia Code','Fira Code',monospace;--r:12px;--rl:20px;--rxl:28px;--shadow:0 4px 24px rgba(0,0,0,.3);--glowshadow:0 0 40px rgba(47,129,247,.15);--t:.3s cubic-bezier(.4,0,.2,1)}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+
+.ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.4;animation:fl 20s ease-in-out infinite}
+.o1{width:600px;height:600px;background:rgba(47,129,247,.12);top:-200px;left:-100px}
+.o2{width:500px;height:500px;background:rgba(163,113,247,.1);top:30%;right:-150px;animation-delay:-7s}
+.o3{width:400px;height:400px;background:rgba(47,129,247,.08);bottom:-100px;left:30%;animation-delay:-14s}
+@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-40px) scale(1.05)}66%{transform:translate(-20px,20px) scale(.95)}}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,10,18,.8);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(--border);transition:var(--t)}
+.nav.scrolled{background:rgba(5,10,18,.95);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-logo{width:40px;height:40px;border-radius:10px}
+.nav-title{font-size:18px;font-weight:700;color:var(--text);letter-spacing:-.3px}
+.nav-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:var(--t);position:relative}
+.nav-links a:hover{color:var(--text)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--grad);border-radius:1px;transition:var(--t)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{padding:10px 24px;background:var(--grad);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:var(--t);text-decoration:none}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(47,129,247,.4)}
+.mob-tog{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer}
+
+/* HERO */
+.hero{position:relative;z-index:1;min-height:auto;display:flex;align-items:center;padding:80px 40px;background:linear-gradient(135deg,#0a1628 0%,#0d1117 40%,#0f0a1e 100%)}
+.hero-c{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--glow);border:1px solid rgba(47,129,247,.25);border-radius:100px;font-size:13px;color:var(--accent2);font-weight:500;margin-bottom:24px;animation:fiu .6s ease-out}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-left h1{font-size:clamp(40px,5vw,60px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:24px;animation:fiu .6s ease-out .1s both}
+.gt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-tag{font-size:20px;font-weight:600;color:var(--indigo);margin-bottom:16px;animation:fiu .6s ease-out .15s both;letter-spacing:-.3px}
+.hero-left p{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:36px;max-width:520px;animation:fiu .6s ease-out .2s both}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;animation:fiu .6s ease-out .3s both}
+.btn-h{padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;transition:var(--t);display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:none}
+.btn-p{background:var(--grad);color:#fff;box-shadow:0 4px 20px rgba(47,129,247,.3)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(47,129,247,.5)}
+.btn-s{background:transparent;color:var(--text);border:1px solid var(--border2)}
+.btn-s:hover{background:var(--glow);border-color:var(--accent)}
+.hero-pb{display:inline-flex;align-items:center;gap:10px;margin-top:32px;padding:12px 20px;background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.2);border-radius:12px;animation:fiu .6s ease-out .4s both}
+.hero-pb .pr{font-size:24px;font-weight:800;color:var(--ok)}
+.hero-pb .pd{font-size:13px;color:var(--muted)}.hero-pb .pd strong{color:var(--text)}
+.hero-stats{display:flex;gap:36px;margin-top:28px;animation:fiu .6s ease-out .45s both}
+.sv{font-size:24px;font-weight:800;color:var(--text);letter-spacing:-.5px}.sv span{color:var(--accent2)}
+.sl{font-size:12px;color:var(--muted);margin-top:2px}
+
+.hero-vis{position:relative;animation:fir .8s ease-out .3s both}
+.app-prev{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--glowshadow),var(--shadow);transform:perspective(1200px) rotateY(-5deg) rotateX(2deg);transition:transform .6s ease}
+.app-prev:hover{transform:perspective(1200px) rotateY(0) rotateX(0)}
+.app-tb{display:flex;align-items:center;gap:8px;padding:12px 16px;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border)}
+.tb-dots{display:flex;gap:6px}.dot{width:10px;height:10px;border-radius:50%}.dr{background:#f85149}.dy{background:#d29922}.dg{background:#3fb950}
+.tb-t{font-size:12px;color:var(--dim);margin-left:12px}
+.app-bd{padding:20px}
+.app-sr{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;margin-bottom:16px}
+.app-sr-i{color:var(--dim);font-size:14px}.app-sr-t{color:var(--dim);font-size:13px}
+.kr{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:var(--t)}
+.kr:hover{border-color:var(--border2)}
+.kd{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.kd-f{background:rgba(210,153,34,.15)}.kd-a{background:rgba(163,113,247,.15)}.kd-c{background:rgba(88,166,255,.15)}.kd-d{background:rgba(248,81,73,.15)}
+.km{flex:1}.km-n{font-size:13px;font-weight:600;color:var(--text)}.km-c{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px}
+.kf{font-size:10px;color:var(--accent2);margin-left:auto;padding:2px 8px;background:var(--glow);border-radius:4px}
+.kmask{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:1px}
+
+.hf{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;box-shadow:var(--shadow);animation:fb 6s ease-in-out infinite}
+.hf1{top:20px;right:-30px}.hf2{bottom:40px;left:-40px;animation-delay:-3s}
+.hf-i{font-size:20px;margin-right:8px}.hf-l{font-size:12px;font-weight:600;color:var(--ok)}.hf-s{font-size:10px;color:var(--dim)}
+@keyframes fb{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes fiu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fir{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:80px 40px}
+.sh{text-align:center;margin-bottom:48px}
+.sh-l{display:inline-block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--accent2);margin-bottom:16px}
+.sh-t{font-size:clamp(32px,4vw,48px);font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+.sh-d{font-size:17px;color:var(--muted);max-width:620px;margin:0 auto;line-height:1.7}
+
+/* PROBLEM/SOLUTION */
+.ps{background:var(--bg2)}
+.ps-g{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.ps-c{padding:28px;border-radius:var(--rxl);border:1px solid var(--border);position:relative;overflow:hidden}
+.ps-c::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px 3px 0 0}
+.ps-p{background:rgba(248,81,73,.03)}.ps-p::before{background:linear-gradient(90deg,var(--bad),#ff7b72)}
+.ps-s{background:linear-gradient(135deg,rgba(47,129,247,.05),rgba(163,113,247,.05))}.ps-s::before{background:var(--grad)}
+.ps-c h3{font-size:22px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.ps-c p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.ps-hl{font-size:14px;font-weight:600;padding:10px 16px;border-radius:8px;margin-top:8px;display:inline-block}
+.ps-p .ps-hl{background:rgba(248,81,73,.1);color:var(--bad)}
+.ps-bl{list-style:none;margin-top:16px}
+.ps-bl li{font-size:14px;color:var(--muted);padding:6px 0;display:flex;align-items:start;gap:10px;line-height:1.6}
+.ps-bl li strong{color:var(--text)}
+.ps-ck{color:var(--ok);font-weight:700;flex-shrink:0;margin-top:2px}
+
+/* FEATURES */
+.feat{background:var(--bg)}
+.feat-g{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.fc{background:linear-gradient(135deg,rgba(47,129,247,.05),rgba(163,113,247,.05));border:1px solid var(--border);border-radius:var(--rl);padding:28px;transition:var(--t);position:relative;overflow:hidden}
+.fc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:var(--t)}
+.fc:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:var(--glowshadow)}.fc:hover::before{opacity:1}
+.fi{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;background:var(--glow);border:1px solid rgba(47,129,247,.15)}
+.fc h3{font-size:18px;font-weight:700;margin-bottom:10px;letter-spacing:-.3px}
+.fc p{font-size:14px;color:var(--muted);line-height:1.7}
+.ft{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;margin-top:14px}
+.ft-sec{background:rgba(63,185,80,.12);color:var(--ok)}.ft-pro{background:rgba(88,166,255,.12);color:var(--accent2)}.ft-ux{background:rgba(163,113,247,.12);color:var(--purple)}
+
+/* SECURITY */
+.sec{background:var(--bg2)}
+.sec-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.sec-pipe{display:flex;flex-direction:column;gap:20px}
+.pip{display:flex;gap:16px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:var(--t)}
+.pip:hover{border-color:var(--border2)}
+.pip-n{width:40px;height:40px;border-radius:50%;background:var(--glow);border:1px solid rgba(47,129,247,.2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--accent2);flex-shrink:0}
+.pip h4{font-size:15px;font-weight:700;margin-bottom:4px}.pip p{font-size:13px;color:var(--muted);line-height:1.6}
+.sec-vis{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:32px;font-family:var(--mono)}
+.sec-vis h4{font-size:14px;font-weight:700;margin-bottom:20px;color:var(--accent2);font-family:var(--font)}
+.vf{display:flex;flex-direction:column;gap:8px}
+.vb{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;font-size:12px}
+.vb .vl{font-weight:600;width:80px;flex-shrink:0}.vb .vv{color:var(--dim)}
+.vb1{background:rgba(210,153,34,.08);color:var(--warn)}.vb2{background:rgba(88,166,255,.08);color:var(--accent2)}.vb3{background:rgba(63,185,80,.08);color:var(--ok)}.vb4{background:rgba(163,113,247,.08);color:var(--purple)}
+
+/* HOW IT WORKS */
+.hiw{background:var(--bg)}
+.steps{max-width:900px;margin:0 auto;position:relative}
+.steps-line{position:absolute;left:32px;top:40px;bottom:40px;width:2px;background:linear-gradient(180deg,var(--accent),var(--purple),transparent)}
+.step{display:flex;gap:32px;padding:24px 0;position:relative}
+.sn{width:64px;height:64px;border-radius:50%;background:var(--card);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--accent2);flex-shrink:0;z-index:2;box-shadow:0 0 20px rgba(47,129,247,.2)}
+.sc h3{font-size:20px;font-weight:700;margin-bottom:8px}.sc p{font-size:15px;color:var(--muted);line-height:1.7}
+
+/* USE CASES */
+.uc{background:var(--bg2)}
+.uc-g{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.ucc{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:28px;transition:var(--t)}
+.ucc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.uci{font-size:36px;margin-bottom:16px}.ucc h3{font-size:20px;font-weight:700;margin-bottom:10px}.ucc p{font-size:14px;color:var(--muted);line-height:1.7}
+.uct{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.uctag{padding:4px 12px;border-radius:6px;font-size:11px;background:rgba(47,129,247,.08);color:var(--accent2);border:1px solid rgba(47,129,247,.15)}
+
+/* COMPETITORS */
+.comp{background:var(--bg)}
+.ctw{max-width:1000px;margin:0 auto;overflow-x:auto}
+.ct{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
+.ct th{padding:14px 20px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:rgba(0,0,0,.3);color:var(--muted);text-align:left;border-bottom:1px solid var(--border)}
+.ct td{padding:14px 20px;font-size:14px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.03)}
+.ct tr:last-child td{border-bottom:none}
+.ct .hr td{background:rgba(47,129,247,.06);color:var(--text);font-weight:500}
+.ct .hr td:nth-child(2){color:var(--ok);font-weight:700}
+.ct .pn{font-weight:600;color:var(--text)}
+
+/* PRICING */
+.pri{background:var(--bg2)}
+.pri-g{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;align-items:start}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:var(--rxl);padding:32px 24px;text-align:center;transition:var(--t);position:relative}
+.pc.feat2{border-color:var(--accent);box-shadow:var(--glowshadow);transform:scale(1.05)}
+.pc.feat2::before{content:'Best Value';position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:4px 16px;background:var(--grad);color:#fff;font-size:11px;font-weight:700;border-radius:100px;text-transform:uppercase;letter-spacing:.5px}
+.ai-disc{margin-top:12px;padding:10px 12px;background:rgba(210,153,34,.1);border:1px solid rgba(210,153,34,.25);border-radius:8px;font-size:11px;color:var(--warn);line-height:1.5;text-align:left}
+.ai-disc strong{color:var(--warn);font-weight:700}
+.pc.ai-badge::before{content:'AI-Infused';position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:4px 16px;background:linear-gradient(135deg,#a371f7,#58a6ff);color:#fff;font-size:11px;font-weight:700;border-radius:100px;text-transform:uppercase;letter-spacing:.5px}
+.pc:hover{transform:translateY(-4px)}.pc.feat2:hover{transform:scale(1.05) translateY(-4px)}.pc.ai-badge:hover{transform:translateY(-4px)}
+.pc-name{font-size:16px;font-weight:600;color:var(--muted);margin-bottom:8px}
+.pc-amt{font-size:48px;font-weight:800;letter-spacing:-2px;margin-bottom:4px}
+.pc-once{display:inline-block;padding:4px 12px;border-radius:6px;background:rgba(63,185,80,.1);color:var(--ok);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:20px}
+.pc-desc{font-size:13px;color:var(--dim);margin-bottom:28px}
+.pc-fl{list-style:none;text-align:left;margin-bottom:32px}
+.pc-fl li{padding:8px 0;font-size:14px;color:var(--muted);display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.03)}
+.pc-fl li:last-child{border:none}
+.ck{color:var(--ok);font-weight:700}
+.pc-btn{display:block;width:100%;padding:14px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;transition:var(--t);cursor:pointer;border:none;text-align:center}
+.pc-bo{background:transparent;color:var(--text);border:1px solid var(--border)}.pc-bo:hover{border-color:var(--accent);color:var(--accent)}
+.pc-bf{background:var(--grad);color:#fff}.pc-bf:hover{box-shadow:0 4px 20px rgba(47,129,247,.4)}
+.pri-note{text-align:center;margin-top:32px;max-width:600px;margin-left:auto;margin-right:auto;font-size:14px;color:var(--dim);line-height:1.6}
+.pri-note strong{color:var(--ok)}
+
+/* TESTIMONIALS */
+.testi{background:var(--bg)}
+.testi-g{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tc{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:32px}
+.tc-s{color:var(--warn);font-size:14px;margin-bottom:16px;letter-spacing:2px}
+.tc-t{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px;font-style:italic}
+.tc-a{display:flex;align-items:center;gap:12px}
+.tc-av{width:40px;height:40px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff}
+.tc-n{font-size:14px;font-weight:600}.tc-r{font-size:12px;color:var(--dim)}
+
+/* TECH SPECS */
+.specs{background:var(--bg2)}
+.sp-g{max-width:800px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sp{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:var(--card);border:1px solid var(--border);border-radius:10px}
+.sp-l{font-size:13px;color:var(--dim);font-weight:500}.sp-v{font-size:13px;color:var(--text);font-weight:600;font-family:var(--mono)}
+
+/* CTA */
+.cta{background:var(--bg);text-align:center;padding:80px 40px;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(47,129,247,.1) 0%,transparent 70%);pointer-events:none}
+.cta h2{font-size:clamp(32px,4vw,48px);font-weight:800;letter-spacing:-1px;margin-bottom:16px;position:relative}
+.cta p{font-size:17px;color:var(--muted);max-width:520px;margin:0 auto 12px;position:relative}
+.cta .cta-pr{font-size:14px;color:var(--ok);font-weight:600;margin-bottom:32px;position:relative}
+.cta-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;position:relative}
+.cta-ch{margin-top:48px;position:relative;font-size:13px;color:var(--dim)}
+.cta-ch a{color:var(--accent2);text-decoration:none}.cta-ch a:hover{text-decoration:underline}
+
+/* FOOTER */
+.footer{background:rgba(5,10,18,.95);border-top:1px solid var(--border);padding:60px 40px 32px}
+.f-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.f-brand p{font-size:14px;color:var(--muted);margin-top:12px;max-width:280px;line-height:1.6}
+.f-col h4{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:16px}
+.f-col a{display:block;font-size:14px;color:var(--muted);text-decoration:none;padding:4px 0;transition:var(--t)}
+.f-col a:hover{color:var(--accent2)}
+.f-bot{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim)}
+.f-bot a{color:var(--accent2);text-decoration:none}
+
+/* CHAT WIDGET - 21st SDK */
+.cw-trig{position:fixed;bottom:24px;right:24px;z-index:999;width:56px;height:56px;border-radius:50%;background:var(--grad);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(47,129,247,.4);transition:var(--t)}
+.cw-trig:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(47,129,247,.6)}
+.cw-trig .bd{position:absolute;top:0;right:0;width:12px;height:12px;background:var(--ok);border-radius:50%;border:2px solid var(--bg);animation:pulse 2s infinite}
+.cp{position:fixed;bottom:92px;right:24px;z-index:998;width:380px;max-height:520px;background:var(--card);border:1px solid var(--border);border-radius:var(--rl);box-shadow:0 16px 48px rgba(0,0,0,.4);display:flex;flex-direction:column;opacity:0;transform:translateY(20px) scale(.95);pointer-events:none;transition:var(--t)}
+.cp.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+.cp-h{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border)}
+.cp-av{width:36px;height:36px;border-radius:10px}
+.cp-hi h4{font-size:14px;font-weight:600}.cp-hi p{font-size:11px;color:var(--ok)}
+.cp-x{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px}
+.cp-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.cm{max-width:80%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
+.cm.bot{background:rgba(47,129,247,.1);border:1px solid rgba(47,129,247,.15);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+.cm.user{background:var(--accent);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.cm .td span{display:inline-block;width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:tb 1.4s infinite;margin:0 2px}
+.cm .td span:nth-child(2){animation-delay:.2s}.cm .td span:nth-child(3){animation-delay:.4s}
+@keyframes tb{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.cp-ib{display:flex;align-items:center;gap:8px;padding:12px 16px;border-top:1px solid var(--border)}
+.cp-ib input{flex:1;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:13px;font-family:var(--font);outline:none;transition:var(--t)}
+.cp-ib input:focus{border-color:var(--accent)}.cp-ib input::placeholder{color:var(--dim)}
+.cp-send{width:38px;height:38px;background:var(--grad);border:none;border-radius:8px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--t);flex-shrink:0}
+.cp-send:hover{box-shadow:0 2px 10px rgba(47,129,247,.4)}
+.cp-pw{text-align:center;padding:6px;font-size:10px;color:var(--dim);border-top:1px solid var(--border)}.cp-pw a{color:var(--accent2);text-decoration:none}
+
+/* PURCHASE CONFIRMATION MODAL */
+.conf-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:var(--t)}
+.conf-overlay.show{opacity:1;pointer-events:all}
+.conf-modal{background:var(--card);border:1px solid var(--border2);border-radius:var(--rxl);padding:48px;max-width:520px;width:90%;text-align:center;transform:scale(.9) translateY(20px);transition:var(--t);box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.conf-overlay.show .conf-modal{transform:scale(1) translateY(0)}
+.conf-icon{width:80px;height:80px;border-radius:50%;background:rgba(63,185,80,.12);border:2px solid var(--ok);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 24px;animation:confPop .5s ease .2s both}
+@keyframes confPop{from{transform:scale(0)}60%{transform:scale(1.2)}to{transform:scale(1)}}
+.conf-modal h2{font-size:28px;font-weight:800;margin-bottom:12px;letter-spacing:-.5px}
+.conf-modal .conf-sub{font-size:16px;color:var(--muted);margin-bottom:24px;line-height:1.6}
+.conf-details{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:24px;text-align:left}
+.conf-details .cd-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:14px}
+.conf-details .cd-row:last-child{border:none}
+.conf-details .cd-label{color:var(--muted)}.conf-details .cd-val{color:var(--text);font-weight:600}
+.conf-details .cd-val.lic{font-family:var(--mono);color:var(--accent2);font-size:13px}
+.conf-steps{background:rgba(47,129,247,.06);border:1px solid rgba(47,129,247,.15);border-radius:var(--r);padding:16px 20px;margin-bottom:24px;text-align:left}
+.conf-steps h4{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--accent2)}
+.conf-steps ol{list-style:none;counter-reset:cs;padding:0;margin:0}
+.conf-steps ol li{counter-increment:cs;font-size:13px;color:var(--muted);padding:4px 0;display:flex;gap:10px;line-height:1.5}
+.conf-steps ol li::before{content:counter(cs);background:var(--glow);color:var(--accent2);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.conf-email{font-size:13px;color:var(--dim);margin-bottom:20px}
+.conf-email strong{color:var(--ok)}
+.conf-close{padding:14px 40px;background:var(--grad);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:var(--t)}
+.conf-close:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(47,129,247,.4)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+.hero-c{grid-template-columns:1fr;gap:48px;text-align:center}
+.hero-left p,.hero-tag{margin-left:auto;margin-right:auto}
+.hero-btns,.hero-stats{justify-content:center}.hero-pb{justify-content:center}
+.hero-vis{max-width:500px;margin:0 auto}.app-prev{transform:none}
+.ps-g{grid-template-columns:1fr}.feat-g{grid-template-columns:repeat(2,1fr)}
+.sec-in{grid-template-columns:1fr}.pri-g{grid-template-columns:repeat(3,1fr);max-width:700px}
+.pc.feat2{transform:none}.pc.feat2:hover{transform:translateY(-4px)}
+.testi-g{grid-template-columns:1fr;max-width:500px;margin:0 auto}
+.f-in{grid-template-columns:1fr 1fr}.uc-g{grid-template-columns:1fr}.sp-g{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+.nav{padding:0 20px}.nav-links{display:none}.mob-tog{display:block}
+section{padding:80px 20px}.hero{padding:80px 20px 60px}
+.feat-g{grid-template-columns:1fr}.f-in{grid-template-columns:1fr;gap:32px}
+.f-bot{flex-direction:column;gap:12px}
+.cp{width:calc(100vw - 32px);right:16px;bottom:84px}.hf{display:none}
+.pri-g{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div class="ambient"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-brand"><img src="protusk-logo.png" alt="ProTusk" class="nav-logo"><span class="nav-title">API Key <span>Vault 2.0</span></span></a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#security">Security</a></li>
+    <li><a href="#use-cases">Use Cases</a></li>
+    <li><a href="#competitors">Compare</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <a href="#pricing" class="nav-cta">Buy Now</a>
+  <button class="mob-tog" onclick="document.querySelector('.nav-links').classList.toggle('show')">&#9776;</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-c">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> v2.0 — Multi-Field Vault + AES-256-GCM</div>
+      <h1><span class="gt">One Password.</span><br>All Your API Keys.</h1>
+      <div style="font-size:14px;color:#5a6370;margin-bottom:12px;letter-spacing:.3px">by <strong style="color:#8b949e">ProTusk</strong></div>
+      <div class="hero-tag">Military-Grade Encryption. Zero Cloud. Pay Once.</div>
+      <p>Stop storing API keys in plaintext. API Key Vault 2.0 encrypts and organizes all your credentials behind a single master password — offline, portable, and yours forever. No subscriptions. No cloud. No risk.</p>
+      <div class="hero-btns">
+        <a href="#pricing" class="btn-h btn-p"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Buy &amp; Download — $9.99</a>
+        <a href="#pricing" class="btn-h btn-s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Try Free Version</a>
+      </div>
+      <div class="hero-pb"><span class="pr">$9.99</span><div class="pd"><strong>One-time purchase. Own forever.</strong><br>No subscription. No recurring fees.</div></div>
+      <div class="hero-stats">
+        <div><div class="sv"><span>AES-256</span>-GCM</div><div class="sl">Authenticated encryption</div></div>
+        <div><div class="sv">310<span>K</span></div><div class="sl">PBKDF2 iterations</div></div>
+        <div><div class="sv">Cross-<span>Platform</span></div><div class="sl">Windows, macOS, Linux</div></div>
+      </div>
+    </div>
+    <div class="hero-vis">
+      <div class="app-prev">
+        <div class="app-tb"><div class="tb-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><span class="tb-t">API Key Vault 2.0 — by ProTusk</span></div>
+        <div class="app-bd">
+          <div class="app-sr"><span class="app-sr-i">&#128269;</span><span class="app-sr-t">Search keys... (Ctrl+K)</span></div>
+          <div class="kr"><div class="kd kd-f">&#128176;</div><div class="km"><div class="km-n">Alpaca Trading</div><div class="km-c">Finance</div></div><span class="kf">3 fields</span><div class="kmask">&bull;&bull;&bull;&bull;&bull;&bull;xJ9k</div></div>
+          <div class="kr"><div class="kd kd-a">&#129302;</div><div class="km"><div class="km-n">OpenAI GPT-4</div><div class="km-c">AI / ML</div></div><span class="kf">2 fields</span><div class="kmask">&bull;&bull;&bull;&bull;&bull;&bull;f3Qp</div></div>
+          <div class="kr"><div class="kd kd-c">&#9729;&#65039;</div><div class="km"><div class="km-n">AWS Production</div><div class="km-c">Cloud</div></div><span class="kf">4 fields</span><div class="kmask">&bull;&bull;&bull;&bull;&bull;&bull;aW2m</div></div>
+          <div class="kr"><div class="kd kd-d">&#128187;</div><div class="km"><div class="km-n">Stripe Live Keys</div><div class="km-c">Payments</div></div><span class="kf">2 fields</span><div class="kmask">&bull;&bull;&bull;&bull;&bull;&bull;7Rnx</div></div>
+        </div>
+      </div>
+      <div class="hf hf1"><span class="hf-i">&#128274;</span><span class="hf-l">AES-256-GCM</span><br><span class="hf-s">Zero-knowledge vault</span></div>
+      <div class="hf hf2"><span class="hf-i">&#128737;&#65039;</span><span class="hf-l">Portable EXE</span><br><span class="hf-s">No install needed</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="ps">
+  <div class="ps-g">
+    <div class="ps-c ps-p">
+      <h3>&#9888;&#65039; The Problem</h3>
+      <p>Developers and teams juggle dozens of API keys, tokens, and secrets across multiple services — from cloud providers like AWS to AI platforms like OpenAI, trading APIs like Alpaca, and payment processors like Stripe.</p>
+      <p>These credentials are often stored in plaintext files, sticky notes, or scattered across password managers not designed for developer workflows.</p>
+      <div class="ps-hl">The average cost of a credential-related breach exceeds $4.5 million (IBM, 2024)</div>
+    </div>
+    <div class="ps-c ps-s">
+      <h3>&#9889; The Solution</h3>
+      <p>API Key Vault 2.0 is a lightweight, portable desktop application purpose-built for managing API credentials. Single executable — no installation, no cloud, no account creation.</p>
+      <ul class="ps-bl">
+        <li><span class="ps-ck">&#10003;</span><span><strong>Zero-knowledge architecture:</strong> All encryption happens locally. No server, no sync, no telemetry.</span></li>
+        <li><span class="ps-ck">&#10003;</span><span><strong>Multi-field entries:</strong> Store API key + secret key + region in a single organized card.</span></li>
+        <li><span class="ps-ck">&#10003;</span><span><strong>One-click copy with auto-clear:</strong> Clipboard wiped after 30 seconds.</span></li>
+        <li><span class="ps-ck">&#10003;</span><span><strong>Portable EXE:</strong> No admin rights needed. Runs from USB, desktop, or any folder.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="feat" id="features">
+  <div class="sh"><div class="sh-l">Features</div><h2 class="sh-t">Everything a Developer Needs.<br>Nothing They Don't.</h2><p class="sh-d">Built with AES-256-GCM encryption and PBKDF2 key derivation, your secrets are protected by the same cryptographic standards used by financial institutions and government agencies.</p></div>
+  <div class="feat-g">
+    <div class="fc"><div class="fi">&#128274;</div><h3>AES-256-GCM Encryption</h3><p>Military-grade authenticated encryption for all stored credentials. Each entry encrypted with a unique IV. GCM mode provides both confidentiality and authenticity.</p><span class="ft ft-sec">Security</span></div>
+    <div class="fc"><div class="fi">&#128272;</div><h3>PBKDF2 Key Derivation</h3><p>310,000 iterations of SHA-256 transforms your master password into an encryption key, making brute-force attacks computationally infeasible.</p><span class="ft ft-sec">Security</span></div>
+    <div class="fc"><div class="fi">&#128194;</div><h3>Multi-Field Entries</h3><p>Group related credentials together — API Key, Secret Key, Region, Endpoint — in a single organized card with individual copy buttons.</p><span class="ft ft-pro">Productivity</span></div>
+    <div class="fc"><div class="fi">&#128203;</div><h3>One-Click Copy + Auto-Clear</h3><p>Copy any field to clipboard instantly. Clipboard auto-clears after 30 seconds to prevent accidental exposure of sensitive credentials.</p><span class="ft ft-ux">UX</span></div>
+    <div class="fc"><div class="fi">&#9201;</div><h3>Auto-Lock</h3><p>Vault automatically locks after 5 minutes of inactivity. Re-authentication required. Ctrl+L for instant manual lock.</p><span class="ft ft-sec">Security</span></div>
+    <div class="fc"><div class="fi">&#128161;</div><h3>Password Hint</h3><p>Optional encrypted hint helps you remember your master password without compromising security. Stored with obfuscation encryption.</p><span class="ft ft-ux">UX</span></div>
+    <div class="fc"><div class="fi">&#128193;</div><h3>Category Organization</h3><p>Tag keys by category — Finance, AI/ML, Cloud, Payments, Dev Tools — with instant search (Ctrl+K) and filter support.</p><span class="ft ft-pro">Productivity</span></div>
+    <div class="fc"><div class="fi">&#128229;</div><h3>Import / Export</h3><p>Backup and restore your encrypted vault. Transfer securely between machines. Your vault is a single encrypted binary file.</p><span class="ft ft-pro">Productivity</span></div>
+    <div class="fc"><div class="fi">&#128640;</div><h3>Portable EXE</h3><p>Single ~74MB executable. No installation, no admin rights, no runtime dependencies. Runs from any folder or USB drive.</p><span class="ft ft-ux">Portable</span></div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="sec" id="security">
+  <div class="sh"><div class="sh-l">Security Architecture</div><h2 class="sh-t">Zero-Knowledge by Design</h2><p class="sh-d">The master password never leaves the application, is never stored on disk, and is never transmitted anywhere. All cryptographic operations happen in-process using native crypto APIs.</p></div>
+  <div class="sec-in">
+    <div class="sec-pipe">
+      <div class="pip"><div class="pip-n">1</div><div><h4>Key Derivation</h4><p>PBKDF2 with 310,000 iterations of SHA-256 derives a 256-bit key from your master password plus a random 32-byte salt.</p></div></div>
+      <div class="pip"><div class="pip-n">2</div><div><h4>Encryption</h4><p>AES-256-GCM encrypts the entire vault using a random 16-byte IV. GCM provides both confidentiality and authenticity.</p></div></div>
+      <div class="pip"><div class="pip-n">3</div><div><h4>Secure Storage</h4><p>Salt + IV + Auth Tag + Ciphertext stored as a single binary blob. No metadata readable without the correct password.</p></div></div>
+      <div class="pip"><div class="pip-n">4</div><div><h4>Runtime Protection</h4><p>Auto-lock after 5 min idle, clipboard auto-clear after 30 sec, password hint stored with obfuscation encryption.</p></div></div>
+    </div>
+    <div class="sec-vis">
+      <h4>Vault File Format (vault.enc)</h4>
+      <div class="vf">
+        <div class="vb vb1"><span class="vl">Salt</span><span class="vv">32 bytes — random, unique per vault</span></div>
+        <div class="vb vb2"><span class="vl">IV</span><span class="vv">16 bytes — random per encryption</span></div>
+        <div class="vb vb3"><span class="vl">Auth Tag</span><span class="vv">16 bytes — GCM integrity proof</span></div>
+        <div class="vb vb4"><span class="vl">Ciphertext</span><span class="vv">Variable — your encrypted vault</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw" id="how-it-works">
+  <div class="sh"><div class="sh-l">How It Works</div><h2 class="sh-t">From Download to Secure in 60 Seconds</h2><p class="sh-d">No accounts, no cloud signup, no configuration. Buy, download, and start securing your keys.</p></div>
+  <div class="steps">
+    <div class="steps-line"></div>
+    <div class="step"><div class="sn">1</div><div class="sc"><h3>Buy &amp; Download</h3><p>Purchase on LemonSqueezy and download the portable EXE (~74MB). No installer — just extract and run. Works from any folder, USB drive, or desktop. No admin rights required.</p></div></div>
+    <div class="step"><div class="sn">2</div><div class="sc"><h3>Set Your Master Password</h3><p>Choose a strong master password. This derives the AES-256-GCM encryption key via PBKDF2 with 310,000 iterations — zero-knowledge means we never see or store your password.</p></div></div>
+    <div class="step"><div class="sn">3</div><div class="sc"><h3>Add Your API Keys</h3><p>Add services with multiple credential fields (API key + secret + region + endpoint). Categorize by Finance, AI/ML, Cloud, Payments, or Dev Tools. Add notes for context.</p></div></div>
+    <div class="step"><div class="sn">4</div><div class="sc"><h3>Work Securely, Always</h3><p>One-click copy puts any value on your clipboard, which auto-clears after 30 seconds. Vault auto-locks after 5 minutes. Keyboard shortcuts for lightning-fast workflows.</p></div></div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="uc" id="use-cases">
+  <div class="sh"><div class="sh-l">Who It's For</div><h2 class="sh-t">Built for Every Technical Professional</h2><p class="sh-d">From solo devs to fintech teams — if you manage API credentials, Vault 2.0 is built for you.</p></div>
+  <div class="uc-g">
+    <div class="ucc"><div class="uci">&#128200;</div><h3>Fintech &amp; Trading Developers</h3><p>Manage exchange API keys and secrets for Alpaca, Coinbase, Interactive Brokers, Polygon.io, and payment processors. Keep trading credentials encrypted and organized.</p><div class="uct"><span class="uctag">Alpaca</span><span class="uctag">Coinbase</span><span class="uctag">Polygon.io</span><span class="uctag">Stripe</span></div></div>
+    <div class="ucc"><div class="uci">&#129302;</div><h3>AI / ML Engineers</h3><p>Keys for OpenAI, Anthropic, Hugging Face, Replicate — organized and encrypted. Switch between project keys without exposing credentials in env files.</p><div class="uct"><span class="uctag">OpenAI</span><span class="uctag">Anthropic</span><span class="uctag">HuggingFace</span><span class="uctag">Replicate</span></div></div>
+    <div class="ucc"><div class="uci">&#9729;&#65039;</div><h3>DevOps Engineers</h3><p>Cloud provider credentials (AWS, GCP, Azure) across environments. Multi-field entries store access key + secret + region + endpoint together.</p><div class="uct"><span class="uctag">AWS</span><span class="uctag">GCP</span><span class="uctag">Azure</span><span class="uctag">DigitalOcean</span></div></div>
+    <div class="ucc"><div class="uci">&#128187;</div><h3>Solo Devs &amp; Small Teams</h3><p>A lightweight secrets solution without enterprise overhead like HashiCorp Vault. Managing keys for client projects across platforms? Vault 2.0 keeps it organized.</p><div class="uct"><span class="uctag">Freelancers</span><span class="uctag">Contractors</span><span class="uctag">Startups</span><span class="uctag">Hobbyists</span></div></div>
+  </div>
+</section>
+
+<!-- COMPETITORS -->
+<section class="comp" id="competitors">
+  <div class="sh"><div class="sh-l">Compare</div><h2 class="sh-t">Why Pay Monthly When You Can Own It?</h2><p class="sh-d">SaaS alternatives cost $48–216/year per user. API Key Vault 2.0 costs $9.99 once.</p></div>
+  <div class="ctw">
+    <table class="ct">
+      <thead><tr><th>Product</th><th>Pricing</th><th>Type</th><th>Key Difference</th></tr></thead>
+      <tbody>
+        <tr><td class="pn">1Password</td><td>$4–8/user/mo</td><td>SaaS</td><td>General password manager, not API-focused</td></tr>
+        <tr><td class="pn">Doppler</td><td>$8–18/user/mo</td><td>SaaS</td><td>Team secrets manager, requires cloud</td></tr>
+        <tr><td class="pn">HashiCorp Vault</td><td>$1.58/hr+</td><td>Enterprise</td><td>Complex setup, server-based</td></tr>
+        <tr><td class="pn">Bitwarden</td><td>$0–6/user/mo</td><td>SaaS</td><td>General passwords, limited dev features</td></tr>
+        <tr><td class="pn">Infisical</td><td>$6–12/user/mo</td><td>SaaS</td><td>Open source alt, still cloud-dependent</td></tr>
+        <tr class="hr"><td class="pn">API Key Vault 2.0</td><td>Free / $9.99–$49.99</td><td>Desktop</td><td>Free tier + paid. Offline, portable, zero-knowledge, no subscription</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pri" id="pricing">
+  <div class="sh"><div class="sh-l">Pricing</div><h2 class="sh-t">Try Free. Pay Once. Own Forever.</h2><p class="sh-d">Start with the free version — no account, no credit card. Upgrade when you need the full vault.</p></div>
+  <div class="pri-g">
+    <div class="pc">
+      <div class="pc-name">Free</div><div class="pc-amt">$0</div><div class="pc-once" style="background:rgba(139,148,158,.1);color:var(--muted)">Free Forever</div><div class="pc-desc">Try it out — no strings attached</div>
+      <ul class="pc-fl"><li><span class="ck">&#10003;</span> Up to 5 API keys</li><li><span class="ck">&#10003;</span> AES-256-GCM encryption</li><li><span class="ck">&#10003;</span> Single-field entries only</li><li><span class="ck">&#10003;</span> 2 categories</li><li><span class="ck">&#10003;</span> In-memory vault (no disk storage)</li><li style="color:var(--dim)"><span style="color:var(--dim)">&#10007;</span> No multi-field entries</li></ul>
+      <a href="#" class="pc-btn pc-bo" id="freeDownload">Download Free</a>
+    </div>
+    <div class="pc">
+      <div class="pc-name">Personal</div><div class="pc-amt">$9.99</div><div class="pc-once">One-Time Purchase</div><div class="pc-desc">Solo developers &amp; hobbyists</div>
+      <ul class="pc-fl"><li><span class="ck">&#10003;</span> Unlimited API keys</li><li><span class="ck">&#10003;</span> Lifetime license (never expires)</li><li><span class="ck">&#10003;</span> 1 device activation</li><li><span class="ck">&#10003;</span> AES-256-GCM encryption</li><li><span class="ck">&#10003;</span> Multi-field entries</li><li><span class="ck">&#10003;</span> All categories + Import/Export</li></ul>
+      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/PERSONAL_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-bo lemonsqueezy-button">Buy Personal — $9.99</a>
+    </div>
+    <div class="pc feat2">
+      <div class="pc-name">Professional</div><div class="pc-amt">$19.99</div><div class="pc-once">One-Time Purchase</div><div class="pc-desc">Freelancers &amp; contractors</div>
+      <ul class="pc-fl"><li><span class="ck">&#10003;</span> Lifetime license (never expires)</li><li><span class="ck">&#10003;</span> 3 device activations</li><li><span class="ck">&#10003;</span> Priority support</li><li><span class="ck">&#10003;</span> AES-256-GCM encryption</li><li><span class="ck">&#10003;</span> Multi-field entries</li><li><span class="ck">&#10003;</span> All categories, shortcuts, import/export</li></ul>
+      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/PROFESSIONAL_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-bf lemonsqueezy-button">Buy Professional — $19.99</a>
+    </div>
+    <div class="pc ai-badge">
+      <div class="pc-name">AI Edition</div><div class="pc-amt">$24.99</div><div class="pc-once">One-Time Purchase</div><div class="pc-desc">For AI-powered workflows</div>
+      <ul class="pc-fl"><li><span class="ck">&#10003;</span> Lifetime license (never expires)</li><li><span class="ck">&#10003;</span> 1 device activation</li><li><span class="ck">&#10003;</span> Everything in Personal</li><li><span class="ck">&#10003;</span> Localhost REST API (127.0.0.1:7777)</li><li><span class="ck">&#10003;</span> Session token authentication</li><li><span class="ck">&#10003;</span> Full CRUD via external AI tools</li><li><span class="ck">&#10003;</span> 6-layer security system</li></ul>
+      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/AI_EDITION_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-bo lemonsqueezy-button">Buy AI Edition — $24.99</a>
+      <div class="ai-disc"><strong>&#9888; Use at your own risk.</strong> The AI Edition exposes vault data via a localhost REST API for use by external AI tools. ProTusk is not responsible for any data loss, unauthorized access, or damages resulting from the use of the AI API feature. By purchasing, you acknowledge and accept full responsibility for how external tools interact with your vault.</div>
+    </div>
+    <div class="pc">
+      <div class="pc-name">Team Pack</div><div class="pc-amt">$49.99</div><div class="pc-once">One-Time Purchase</div><div class="pc-desc">Small teams &amp; startups</div>
+      <ul class="pc-fl"><li><span class="ck">&#10003;</span> Lifetime license (never expires)</li><li><span class="ck">&#10003;</span> 10 device activations</li><li><span class="ck">&#10003;</span> Team deployment guide</li><li><span class="ck">&#10003;</span> Priority support</li><li><span class="ck">&#10003;</span> AES-256-GCM encryption</li><li><span class="ck">&#10003;</span> Everything in Professional</li></ul>
+      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/TEAM_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-bo lemonsqueezy-button">Buy Team Pack — $49.99</a>
+    </div>
+  </div>
+  <div class="pri-note"><strong>Paid tiers sold on LemonSqueezy</strong> — secure payment, instant delivery, license key generation, and global tax handling. Free version: direct download, no account needed.</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="sh"><div class="sh-l">Testimonials</div><h2 class="sh-t">Loved by Developers Who Ship</h2></div>
+  <div class="testi-g">
+    <div class="tc"><div class="tc-s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tc-t">"I manage 40+ trading API keys across Alpaca, Coinbase, and Polygon. Finally a vault that doesn't phone home. Multi-field entries are exactly what I needed — key, secret, and endpoint in one card."</p><div class="tc-a"><div class="tc-av">M</div><div><div class="tc-n">Marcus R.</div><div class="tc-r">Quantitative Developer</div></div></div></div>
+    <div class="tc"><div class="tc-s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tc-t">"$9.99 one-time vs $96/year for 1Password? Easy choice. I keep it on a USB drive and it works anywhere. No install, no admin rights. The 30-second clipboard clear is a nice security touch."</p><div class="tc-a"><div class="tc-av">J</div><div><div class="tc-n">James L.</div><div class="tc-r">Freelance DevOps Engineer</div></div></div></div>
+    <div class="tc"><div class="tc-s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tc-t">"We bought the Team Pack for our 6-person startup. Way simpler than HashiCorp Vault, and it does exactly what we need — organize and encrypt API keys without enterprise overhead."</p><div class="tc-a"><div class="tc-av">S</div><div><div class="tc-n">Sarah K.</div><div class="tc-r">CTO, Early-Stage Startup</div></div></div></div>
+  </div>
+</section>
+
+<!-- TECH SPECS -->
+<section class="specs">
+  <div class="sh"><div class="sh-l">Technical Specifications</div><h2 class="sh-t">Under the Hood</h2></div>
+  <div class="sp-g">
+    <div class="sp"><span class="sp-l">Platform</span><span class="sp-v">Windows · macOS · Linux</span></div>
+    <div class="sp"><span class="sp-l">Runtime</span><span class="sp-v">Electron 33</span></div>
+    <div class="sp"><span class="sp-l">Encryption</span><span class="sp-v">AES-256-GCM</span></div>
+    <div class="sp"><span class="sp-l">Key Derivation</span><span class="sp-v">PBKDF2-SHA256 310K</span></div>
+    <div class="sp"><span class="sp-l">File Size</span><span class="sp-v">~74 MB portable</span></div>
+    <div class="sp"><span class="sp-l">Data Storage</span><span class="sp-v">vault.enc (encrypted)</span></div>
+    <div class="sp"><span class="sp-l">Dependencies</span><span class="sp-v">None — self-contained</span></div>
+    <div class="sp"><span class="sp-l">Network Access</span><span class="sp-v">None — fully offline</span></div>
+    <div class="sp"><span class="sp-l">Admin Rights</span><span class="sp-v">Not required</span></div>
+    <div class="sp"><span class="sp-l">AI API</span><span class="sp-v">127.0.0.1:7777 (AI editions)</span></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Stop Storing API Keys<br>in <span class="gt">Plaintext</span>.</h2>
+  <p>One password. All your API keys. Military-grade encryption. Pay once, own forever.</p>
+  <div class="cta-pr">Starting at Free — paid plans from $9.99</div>
+  <div class="cta-btns">
+    <a href="#pricing" class="btn-h btn-p"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Buy Now on LemonSqueezy</a>
+    <a href="https://github.com/21st-dev/21st-sdk" target="_blank" class="btn-h btn-s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> View 21st SDK</a>
+  </div>
+  <div class="cta-ch">Find us on <a href="#">Reddit</a> &bull; <a href="#">Hacker News</a> &bull; <a href="#">Dev.to</a> &bull; <a href="#">Product Hunt</a> &bull; <a href="#">Twitter/X</a></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="f-in">
+    <div class="f-brand"><a href="#" class="nav-brand"><img src="protusk-logo.png" alt="ProTusk" class="nav-logo"><span class="nav-title">API Key <span>Vault 2.0</span></span></a><p>Secure API Key Management for Developers & Teams. Built with security-first architecture. Priced to win.</p></div>
+    <div class="f-col"><h4>Product</h4><a href="#features">Features</a><a href="#security">Security</a><a href="#pricing">Pricing</a><a href="#competitors">Compare</a></div>
+    <div class="f-col"><h4>Use Cases</h4><a href="#use-cases">Fintech &amp; Trading</a><a href="#use-cases">AI / ML Engineers</a><a href="#use-cases">DevOps</a><a href="#use-cases">Solo Devs &amp; Teams</a></div>
+    <div class="f-col"><h4>Resources</h4><a href="https://github.com/21st-dev/21st-sdk" target="_blank">21st SDK (GitHub)</a><a href="https://lemonsqueezy.com" target="_blank">Buy on LemonSqueezy</a><a href="#">Support</a><a href="docs/legal.html">Legal &amp; Privacy</a></div>
+  </div>
+  <div class="f-bot"><span>&copy; 2026 ProTusk. All rights reserved. &bull; <a href="docs/legal.html">Terms</a> &bull; <a href="docs/legal.html#privacy">Privacy</a></span><span>Powered by <a href="https://github.com/21st-dev/21st-sdk" target="_blank">21st SDK</a> &bull; Sold on <a href="https://lemonsqueezy.com" target="_blank">LemonSqueezy</a></span></div>
+</footer>
+
+<!-- PURCHASE CONFIRMATION MODAL -->
+<div class="conf-overlay" id="confOverlay">
+  <div class="conf-modal">
+    <div class="conf-icon">&#10003;</div>
+    <h2>Purchase Complete!</h2>
+    <p class="conf-sub">Thank you for purchasing API Key Vault 2.0. Your license key and download link are on their way.</p>
+    <div class="conf-details">
+      <div class="cd-row"><span class="cd-label">Product</span><span class="cd-val" id="confProduct">API Key Vault 2.0</span></div>
+      <div class="cd-row"><span class="cd-label">License Type</span><span class="cd-val" id="confLicense">Lifetime</span></div>
+      <div class="cd-row"><span class="cd-label">Activations</span><span class="cd-val" id="confActivations">—</span></div>
+      <div class="cd-row"><span class="cd-label">License Key</span><span class="cd-val lic" id="confKey">Check your email</span></div>
+    </div>
+    <div class="conf-steps">
+      <h4>Next Steps</h4>
+      <ol>
+        <li>Check your email for the download link and license key</li>
+        <li>Download and extract the portable EXE (~74MB)</li>
+        <li>Run the app and set your master password</li>
+        <li>Enter your license key when prompted to activate</li>
+      </ol>
+    </div>
+    <p class="conf-email"><strong>Receipt and license key sent to your email.</strong> If you don't see it, check your spam folder.</p>
+    <button class="conf-close" id="confClose">Start Securing Your Keys</button>
+  </div>
+</div>
+
+<!-- 21st SDK CHAT WIDGET -->
+<button class="cw-trig" id="chatTrigger" title="Chat with ProTusk AI"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="bd"></span></button>
+<div class="cp" id="chatPanel">
+  <div class="cp-h"><img src="protusk-logo.png" alt="ProTusk" class="cp-av"><div class="cp-hi"><h4>ProTusk AI Assistant</h4><p>Powered by 21st SDK &bull; Online</p></div><button class="cp-x" id="chatClose">&times;</button></div>
+  <div class="cp-msgs" id="chatMessages"><div class="cm bot">Hey! &#128075; I'm the ProTusk assistant, built with the <strong>21st SDK</strong>. Ask me about features, pricing, security, or how Vault 2.0 compares to alternatives!</div></div>
+  <div class="cp-ib"><input type="text" id="chatInput" placeholder="Ask about pricing, features, security..." autocomplete="off"><button class="cp-send" id="chatSend"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div>
+  <div class="cp-pw">Powered by <a href="https://github.com/21st-dev/21st-sdk" target="_blank">@21st-sdk/react</a> AgentChat</div>
+</div>
+
+<script>
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>50)});
+var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)'}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fc,.ucc,.pc,.tc,.step,.pip,.ps-c,.sp').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity .5s ease,transform .5s ease';obs.observe(el)});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+var ct=document.getElementById('chatTrigger'),cp=document.getElementById('chatPanel'),cx=document.getElementById('chatClose'),ci=document.getElementById('chatInput'),cs=document.getElementById('chatSend'),cm=document.getElementById('chatMessages'),co=false;
+ct.onclick=function(){co=!co;cp.classList.toggle('open',co);if(co)ci.focus()};
+cx.onclick=function(){co=false;cp.classList.remove('open')};
+var kb={pric:"We have a <strong>free version</strong> plus paid tiers:<br><br><strong>Free:</strong> $0 forever (5 keys, single-field, 2 categories)<br><strong>Personal:</strong> $9.99 one-time (unlimited keys, multi-field, all categories)<br><strong>Professional:</strong> $19.99 one-time (3 devices + priority support)<br><strong>AI Edition:</strong> $24.99 one-time (REST API on 127.0.0.1:7777, token auth, AI workflows)<br><strong>Team Pack:</strong> $49.99 one-time (10 licenses + deployment guide)<br><br>Paid tiers sold on LemonSqueezy with overlay checkout.",free:"Yes! There's a <strong>free version</strong> with up to 5 API keys, AES-256-GCM encryption, and 2 categories. It uses single-field entries only (no multi-field). No import/export. It's a great way to try Vault 2.0 before upgrading to a paid tier.",encrypt:"We use <strong>AES-256-GCM</strong> with <strong>PBKDF2</strong> (310,000 iterations SHA-256). Vault stores: Salt (32B) + IV (16B) + Auth Tag (16B) + Ciphertext. No metadata readable without your password.",feature:"Features: AES-256-GCM, PBKDF2 (310K iterations), multi-field entries, one-click copy with <strong>30-sec auto-clear</strong>, auto-lock (5 min), categories, import/export, dark mode, portable EXE (~74MB), keyboard shortcuts.",compar:"Unlike SaaS alternatives ($48-216/yr per user):<br><br>&#8226; 1Password: $4-8/user/mo<br>&#8226; Doppler: $8-18/user/mo<br>&#8226; HashiCorp: $1.58/hr+<br><br>Vault 2.0 is <strong>$9.99 one-time</strong>, offline, zero-knowledge.",offline:"100% offline. No cloud, no telemetry, no network requests. Zero-knowledge architecture by design.",setup:"60 seconds: 1) Buy on LemonSqueezy, 2) Download ~74MB EXE, 3) Set master password, 4) Add keys. No installer, no admin rights.",team:"<strong>Team Pack ($49.99)</strong> includes 10 licenses + deployment guide. Perfect alternative to HashiCorp Vault for small teams.",portab:"Single ~74MB executable. No install, no admin rights, no dependencies. Runs from any folder or USB.",lemon:"Sold on <strong>LemonSqueezy</strong> — secure payment, license keys, instant delivery, global tax compliance.",secur:"Zero-knowledge: master password <strong>never leaves the app</strong>, never stored on disk, never transmitted. Auto-lock 5 min, clipboard clear 30 sec.",financ:"Finance category for Alpaca, Coinbase, Interactive Brokers, Stripe, Plaid, Polygon.io. Multi-field entries for key + secret + endpoint.",ai:"<strong>AI Edition ($24.99)</strong> adds a REST API on 127.0.0.1:7777. Includes session token authentication, full CRUD operations via external AI tools, real-time vault sync, and disables auto-lock for AI sessions.",sdk:"This assistant uses the <strong>21st SDK</strong> (@21st-sdk/react AgentChat). Production-ready chat UI with streaming markdown. github.com/21st-dev/21st-sdk"};
+function gr(m){var l=m.toLowerCase();for(var k in kb){if(l.indexOf(k)!==-1)return kb[k]}if(l.match(/hello|hi|hey/))return"Hello! Ask about features, pricing, security, or comparisons.";if(l.match(/thank/))return"You're welcome! Head to pricing to get started.";return"I can help with <strong>pricing</strong> ($9.99 one-time), <strong>features</strong>, <strong>security</strong> (AES-256-GCM), <strong>comparisons</strong>, or <strong>setup</strong>. What interests you?"}
+function am(t,c){var d=document.createElement('div');d.className='cm '+c;d.innerHTML=t;cm.appendChild(d);cm.scrollTop=cm.scrollHeight;return d}
+function snd(){var t=ci.value.trim();if(!t)return;am(t,'user');ci.value='';var ty=am('<span class="td"><span></span><span></span><span></span></span>','bot');setTimeout(function(){ty.remove();am(gr(t),'bot')},700+Math.random()*500)}
+cs.onclick=snd;ci.onkeydown=function(e){if(e.key==='Enter')snd()};
+window.addEventListener('scroll',function(){var v=document.querySelector('.hero-vis');if(v)v.style.transform='translateY('+window.scrollY*.06+'px)'});
+
+// === PURCHASE CONFIRMATION MODAL ===
+var confOverlay=document.getElementById('confOverlay'),confClose=document.getElementById('confClose');
+confClose.onclick=function(){confOverlay.classList.remove('show')};
+confOverlay.onclick=function(e){if(e.target===confOverlay)confOverlay.classList.remove('show')};
+
+function showConfirmation(product,activations){
+  document.getElementById('confProduct').textContent=product||'API Key Vault 2.0';
+  document.getElementById('confLicense').textContent='Lifetime (never expires)';
+  document.getElementById('confActivations').textContent=activations||'—';
+  confOverlay.classList.add('show');
+}
+
+// LemonSqueezy Checkout Event — fires after successful purchase
+window.addEventListener('message',function(e){
+  if(e.origin&&e.origin.indexOf('lemonsqueezy')!==-1){
+    try{
+      var d=typeof e.data==='string'?JSON.parse(e.data):e.data;
+      if(d&&(d.event==='Checkout.Success'||d.event==='PaymentMethodUpdate.Updated'||(d.meta&&d.meta.event_name==='order_created'))){
+        var name=d.data&&d.data.attributes&&d.data.attributes.first_order_item?d.data.attributes.first_order_item.product_name:'API Key Vault 2.0';
+        var acts='1 device';
+        if(name&&name.toLowerCase().indexOf('professional')!==-1)acts='3 devices';
+        if(name&&name.toLowerCase().indexOf('ai')!==-1)acts='1 device + API access';
+        if(name&&name.toLowerCase().indexOf('team')!==-1)acts='10 devices';
+        showConfirmation(name,acts);
+      }
+    }catch(ex){}
+  }
+}
