@@ -110,7 +110,7 @@ h1{font-size:36px;font-weight:900;line-height:1.1;letter-spacing:-1.2px;margin-b
 .pc-btn-o{background:transparent;color:var(--text);border:1px solid var(--border)}
 .pc-btn-f{background:var(--grad);color:#fff}
 .pc-btn-ai{background:linear-gradient(135deg,#a371f7,#58a6ff);color:#fff}
-.ai-warn{margin-top:10px;padding:8px 10px;background:rgba(210,153,34,.1);border:1px solid rgba(210,153,34,.2);border-radius:8px;font-size:10px;color:var(--warn);line-height:1.4;text-align:left}
+.pc-list .shield{color:var(--purple)}
 
 .scroll-hint{text-align:center;margin-top:8px;font-size:11px;color:var(--dim)}
 
@@ -246,13 +246,14 @@ h1{font-size:36px;font-weight:900;line-height:1.1;letter-spacing:-1.2px;margin-b
       <div class="pc-price">$24.99</div>
       <div class="pc-once">One-Time</div>
       <ul class="pc-list">
-        <li><span class="ck">&#10003;</span> 1 device only</li>
-        <li><span class="ck">&#10003;</span> REST API (localhost)</li>
-        <li><span class="ck">&#10003;</span> Token auth</li>
-        <li><span class="ck">&#10003;</span> AI tool access</li>
+        <li><span class="ck">&#10003;</span> 1 device &bull; AI tool access</li>
+        <li><span class="ck">&#128737;</span> AES-256-GCM encryption</li>
+        <li><span class="ck">&#128737;</span> PBKDF2-310K key derivation</li>
+        <li><span class="ck">&#128737;</span> Zero-knowledge architecture</li>
+        <li><span class="ck">&#128737;</span> Auto-lock &bull; Clipboard wipe</li>
+        <li><span class="ck">&#128737;</span> Offline-only &mdash; no cloud</li>
       </ul>
       <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/AI_PERSONAL_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-btn-ai lemonsqueezy-button">Buy — $24.99</a>
-      <div class="ai-warn"><strong>&#9888; Use at own risk.</strong> Exposes vault via localhost API for external AI tools.</div>
     </div>
 
     <div class="pc featured-ai">
@@ -261,12 +262,14 @@ h1{font-size:36px;font-weight:900;line-height:1.1;letter-spacing:-1.2px;margin-b
       <div class="pc-price">$59.99</div>
       <div class="pc-once">One-Time</div>
       <ul class="pc-list">
-        <li><span class="ck">&#10003;</span> 3 devices</li>
-        <li><span class="ck">&#10003;</span> Everything in AI Personal</li>
-        <li><span class="ck">&#10003;</span> Priority support</li>
-        <li><span class="ck">&#10003;</span> Deployment guide</li>
+        <li><span class="ck">&#10003;</span> 3 devices &bull; Priority support</li>
+        <li><span class="ck">&#128737;</span> AES-256-GCM encryption</li>
+        <li><span class="ck">&#128737;</span> PBKDF2-310K key derivation</li>
+        <li><span class="ck">&#128737;</span> Zero-knowledge architecture</li>
+        <li><span class="ck">&#128737;</span> Auto-lock &bull; Clipboard wipe</li>
+        <li><span class="ck">&#128737;</span> Offline-only &mdash; no cloud</li>
       </ul>
-      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/PRO_AI_TEAM_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-btn-o lemonsqueezy-button">Buy — $59.99</a>
+      <a href="https://YOUR_STORE_ID.lemonsqueezy.com/checkout/buy/PRO_AI_TEAM_VARIANT_ID?embed=1&media=0&logo=0&dark=1" class="pc-btn pc-btn-ai lemonsqueezy-button">Buy — $59.99</a>
     </div>
 
   </div>
@@ -290,14 +293,4 @@ h1{font-size:36px;font-weight:900;line-height:1.1;letter-spacing:-1.2px;margin-b
 </footer>
 
 <script>
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener('click',function(e){
-    e.preventDefault();
-    var t=document.querySelector(a.getAttribute('href'));
-    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
-  });
-});
-</script>
-</body>
-</html>
+// Smooth scroll for anchor
